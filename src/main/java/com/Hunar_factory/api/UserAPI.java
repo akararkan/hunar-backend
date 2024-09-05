@@ -2,14 +2,13 @@ package com.Hunar_factory.api;
 
 import com.Hunar_factory.jwt.Token;
 import com.Hunar_factory.jwt.TokenResponse;
-import com.Hunar_factory.model.User;
-import com.Hunar_factory.service.UserService;
+import com.Hunar_factory.model.factory.User;
+import com.Hunar_factory.service.factory_service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:5173") // Adjust this to your frontend URL

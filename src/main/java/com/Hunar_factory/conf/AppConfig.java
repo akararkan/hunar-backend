@@ -1,6 +1,6 @@
 package com.Hunar_factory.conf;
 
-import com.Hunar_factory.repo.UserRepository;
+import com.Hunar_factory.repo.factory_repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
