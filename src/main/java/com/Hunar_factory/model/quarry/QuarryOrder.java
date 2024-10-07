@@ -27,8 +27,6 @@ public class QuarryOrder {
     private String ownerEmail;
     private String ownerPhoneNumber;
     private OrderStatus status;
-    @OneToMany(mappedBy = "quarryOrder")
-    private List<QuarryPackage> quarryPackages;
     private Integer quantity;
     private Date createDate;
     private Date updateDate;

@@ -27,6 +27,7 @@ public class Stone {
     private Type type;
     private String color;
     private Long price;
+    private String imageUrl;
     private Date createDate;
     private Date updateDate;
 

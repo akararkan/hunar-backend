@@ -17,8 +17,8 @@ public class PalletAPI {
     private final PalletService palletService;
 
     @PostMapping("/addPallet")
-    public ResponseEntity<Pallet> addPallet(@RequestBody Pallet pallet){
-        return palletService.addPallet(pallet);
+    public ResponseEntity<Pallet> addPallet(@RequestBody Pallet pallet , @RequestParam Long packageId , @RequestParam Long workerId){
+        return palletService.addPallet(pallet , packageId , workerId);
     }
 
     @PutMapping("/updatePalletById/{id}")
@@ -35,7 +35,7 @@ public class PalletAPI {
     }
     @DeleteMapping("/deletePalletById/{id}")
     public void deletePalletById(@PathVariable Long id){
-         palletService.deletePalletById(id);
+        palletService.deletePalletById(id);
     }
 
 }

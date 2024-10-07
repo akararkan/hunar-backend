@@ -16,9 +16,9 @@ public class PackageAPI {
     private final PackageService packageService;
 
     // Add Package
-    @PostMapping("/addPacke")
-    public ResponseEntity<Package> addPackage(@RequestBody Package packageData) {
-        return packageService.addPackage(packageData);
+    @PostMapping("/addPackage")
+    public ResponseEntity<Package> addPackage(@RequestBody Package packageData , @RequestParam Long orderId) {
+        return packageService.addPackage(packageData , orderId);
     }
 
     // Update Package

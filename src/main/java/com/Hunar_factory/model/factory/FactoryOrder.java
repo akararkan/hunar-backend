@@ -28,8 +28,6 @@ public class FactoryOrder {
     private String ownerEmail;
     private String ownerPhoneNumber;
     private OrderStatus status;
-    @OneToMany(mappedBy = "factoryOrder")
-    private List<Package> packages;
     private Date createDate;
     private Date updateDate;
 

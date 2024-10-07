@@ -1,9 +1,10 @@
 package com.Hunar_factory.service.factory_service;
 
 import com.Hunar_factory.model.factory.Helen;
+import com.Hunar_factory.model.factory.Worker;
 import com.Hunar_factory.repo.factory_repo.HelenRepository;
+import com.Hunar_factory.repo.factory_repo.WorkerRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,15 +20,19 @@ import java.util.Optional;
 public class HelenService {
     private static final Logger logger = LoggerFactory.getLogger(HelenService.class);
     private final HelenRepository helenRepository;
-
-    public ResponseEntity<Helen> addHelen(Helen helen) {
+    private final WorkerRepository workerRepository; // Inject the Worker repository
+    public ResponseEntity<Helen> addHelen(Helen helen , Long workerId) {
+        Worker worker = workerRepository.findById(workerId).orElse(null);
+        if (worker == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // Return bad request if worker is not found
+        }
         try {
             Helen newHelen = Helen.builder()
                     .id(helen.getId())
                     .name(helen.getName())
                     .type(helen.getType())
                     .createDate(new Date())
-                    .worker(helen.getWorker())
+                    .worker(worker)
                     .updateDate(null)
                     .build();
             helenRepository.save(newHelen);

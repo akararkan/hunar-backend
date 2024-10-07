@@ -25,8 +25,6 @@ public class Quarry {
     private String location;
     private Type type;
     private boolean availability;
-    @OneToMany(mappedBy = "quarry")
-    private List<QuarryWorker> quarryWorker;
     private Date createDate;
     private Date updateDate;
 

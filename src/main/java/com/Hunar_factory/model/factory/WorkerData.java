@@ -2,6 +2,8 @@ package com.Hunar_factory.model.factory;
 
 import com.Hunar_factory.enums.StoneName;
 import com.Hunar_factory.enums.StoneSize;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +27,8 @@ public class WorkerData {
     private StoneName stoneName;
     private StoneSize stoneSize;
     private Long todayGainPrice;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "worker_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "worker_id", nullable = true)
     private Worker worker;
     private Date createDate;
     private Date updateDate;

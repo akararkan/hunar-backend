@@ -25,9 +25,11 @@ public class WorkerService {
                     .id(worker.getId())
                     .fullName(worker.getFullName())
                     .phoneNumber(worker.getPhoneNumber())
+                    .email(worker.getEmail())
                     .address(worker.getAddress())
                     .nationality(worker.getNationality())
                     .workerType(worker.getWorkerType())
+                    .gender(worker.getGender())
                     .createDate(new Date())
                     .updateDate(null)
                     .build();
@@ -53,8 +55,10 @@ public class WorkerService {
                 existingWorker.setFullName(worker.getFullName());
                 existingWorker.setPhoneNumber(worker.getPhoneNumber());
                 existingWorker.setAddress(worker.getAddress());
+                existingWorker.setEmail(worker.getEmail());
                 existingWorker.setNationality(worker.getNationality());
                 existingWorker.setWorkerType(worker.getWorkerType());
+                existingWorker.setGender(worker.getGender());
                 existingWorker.setUpdateDate(new Date()); // Set the update date to the current date
                 // Save the updated worker back to the repository
                 Worker updatedWorker = workerRepository.save(existingWorker);

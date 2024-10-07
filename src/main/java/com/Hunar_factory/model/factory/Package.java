@@ -23,8 +23,8 @@ public class Package{
     private String code;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "aPackage")
-    private List<Pallet> pallets;
+//    @OneToMany(mappedBy = "aPackage")
+//    private List<Pallet> pallets;
     private Long totalPrice;
     private Date createDate;
     private Date updateDate;

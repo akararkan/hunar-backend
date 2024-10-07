@@ -17,8 +17,8 @@ public class WorkerDataAPI {
 
     // Add WorkerData
     @PostMapping("/addWorkerData")
-    public ResponseEntity<WorkerData> addWorkerData(@RequestBody WorkerData workerData) {
-        return workerDataService.addWorkerData(workerData);
+    public ResponseEntity<WorkerData> addWorkerData(@RequestBody WorkerData workerData , @RequestParam Long workerId) {
+        return workerDataService.addWorkerData(workerData , workerId);
     }
 
     // Update WorkerData
@@ -40,7 +40,7 @@ public class WorkerDataAPI {
     }
 
     // Delete WorkerData by ID
-    @DeleteMapping("/deleteWorkerDataBy/{id}")
+    @DeleteMapping("/deleteWorkerDataById/{id}")
     public ResponseEntity<Void> deleteWorkerData(@PathVariable Long id) {
         return workerDataService.deleteWorkerData(id);
     }

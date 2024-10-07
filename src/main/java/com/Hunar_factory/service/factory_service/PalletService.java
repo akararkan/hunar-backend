@@ -1,8 +1,12 @@
 package com.Hunar_factory.service.factory_service;
 
 import com.Hunar_factory.enums.StoneName;
+import com.Hunar_factory.model.factory.Package;
 import com.Hunar_factory.model.factory.Pallet;
+import com.Hunar_factory.model.factory.Worker;
+import com.Hunar_factory.repo.factory_repo.PackageRepository;
 import com.Hunar_factory.repo.factory_repo.PalletRepository;
+import com.Hunar_factory.repo.factory_repo.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +23,17 @@ import java.util.Optional;
 public class PalletService {
     private final PalletRepository palletRepository;
     private static final Logger logger = LoggerFactory.getLogger(PalletService.class);
-
-    public ResponseEntity<Pallet> addPallet(Pallet pallet) {
+    private final PackageRepository packageRepository;
+    private final WorkerRepository workerRepository;
+    public ResponseEntity<Pallet> addPallet(Pallet pallet , Long packageId , Long workerId) {
+        Package palletPackage = packageRepository.findById(packageId).orElse(null);
+        if(palletPackage == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Worker worker = workerRepository.findById(workerId).orElse(null);
+        if(worker == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         try {
             Pallet newPallet = Pallet.builder()
                     .stoneName(pallet.getStoneName())
@@ -30,8 +43,9 @@ public class PalletService {
                     .meterMount(pallet.getMeterMount())
                     .price(pallet.getPrice())
                     .worker(pallet.getWorker())
-                    .aPackage(pallet.getAPackage())
                     .createDate(new Date())
+                    .aPackage(palletPackage)
+                    .worker(worker)
                     .updateDate(null)
                     .build();
 

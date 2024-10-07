@@ -3,6 +3,7 @@ package com.Hunar_factory.model.factory;
 import com.Hunar_factory.enums.MeterMeasure;
 import com.Hunar_factory.enums.StoneName;
 import com.Hunar_factory.enums.StoneSize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,13 +30,10 @@ public class Pallet {
     private Long meterMount;
     private Long price;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "worker_id", nullable = false)
+    @JoinColumn(name = "worker_id")
     private Worker worker;
-
-
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "package_id" , nullable = false)
+    @ManyToOne( fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "package_id")
     private Package aPackage;
     private Date createDate;
     private Date updateDate;

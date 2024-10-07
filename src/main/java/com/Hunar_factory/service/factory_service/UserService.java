@@ -22,6 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -206,6 +208,21 @@ public class UserService implements UserDetailsService {
             // Log or handle the exceptions
             return new TokenResponse("az: " + e.getMessage());
         }
+    }
+    public User getCurrentUserProfile() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Authentication object: " + authentication); // Log the authentication object
+
+        String email = authentication.getName();
+        System.out.println("Authenticated user email: " + email); // Log the user email
+
+        if (email.equals("anonymousUser")) {
+            throw new RuntimeException("User not authenticated");
+        }
+
+        // Fetch the user from the repository as before
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
     }
 
 }

@@ -29,6 +29,7 @@ public class StoneService {
                     .location(stone.getLocation())
                     .color(stone.getColor())
                     .price(stone.getPrice())
+                    .imageUrl(stone.getImageUrl())
                     .createDate(new Date())
                     .updateDate(null)
                     .build();
@@ -55,6 +56,7 @@ public class StoneService {
             existingStone.setType(stone.getType());
             existingStone.setColor(stone.getColor());
             existingStone.setPrice(stone.getPrice());
+            existingStone.setImageUrl(stone.getImageUrl());
             existingStone.setUpdateDate(new Date());  // Update the updateDate field
 
             // Save updated stone

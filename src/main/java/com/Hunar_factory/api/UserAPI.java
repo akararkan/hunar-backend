@@ -5,11 +5,14 @@ import com.Hunar_factory.jwt.TokenResponse;
 import com.Hunar_factory.model.factory.User;
 import com.Hunar_factory.service.factory_service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:5173") // Adjust this to your frontend URL
 @RestController
@@ -52,7 +55,26 @@ public class UserAPI {
         TokenResponse tokenResponse = userService.login(user);
         // Return success response with token
         return ResponseEntity.ok(tokenResponse);
+    }
 
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+        // Invalidate session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        // Clear authentication
+        SecurityContextHolder.clearContext();
+
+        return ResponseEntity.ok("Logout successful");
+    }
+    @GetMapping("/profile")
+    public ResponseEntity<User> getUserProfile() {
+        // Fetch the current user's profile
+        User user = userService.getCurrentUserProfile();
+        return ResponseEntity.ok(user);
     }
 
 

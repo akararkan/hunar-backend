@@ -15,7 +15,7 @@ public class SecurityConstants {
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
     public static final String ID_CLAIM = "id";
     public static final String ROLE = "ROLE";
-    public static final String[] PUBLIC_URL = { "/api/v1/user/**" , "/api/v1/**"};
+    public static final String[] PUBLIC_URL = { "/api/v1/user/**" , "/api/v1/**" , "/uploads/**"};
 
 
 

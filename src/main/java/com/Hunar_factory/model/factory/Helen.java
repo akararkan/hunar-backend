@@ -19,7 +19,7 @@ public class Helen {
     private Long id;
     private String name;
     private String type;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "worker_id", referencedColumnName = "id")
     private Worker worker;
     private Date createDate;

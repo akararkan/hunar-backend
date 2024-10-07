@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize->{
                     authorize.requestMatchers(PUBLIC_URL).permitAll()
                             .requestMatchers("/error").permitAll()
+                            .requestMatchers("/api/v1/user/profile").authenticated()
                             .anyRequest().authenticated();
                 })
                 .sessionManagement(sessionManagement -> sessionManagement

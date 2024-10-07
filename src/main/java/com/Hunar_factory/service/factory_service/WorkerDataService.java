@@ -1,7 +1,9 @@
 package com.Hunar_factory.service.factory_service;
 
+import com.Hunar_factory.model.factory.Worker;
 import com.Hunar_factory.model.factory.WorkerData;
 import com.Hunar_factory.repo.factory_repo.WorkerDataRepository;
+import com.Hunar_factory.repo.factory_repo.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +21,14 @@ public class WorkerDataService {
 
     private static final Logger logger = LoggerFactory.getLogger(WorkerDataService.class);
     private final WorkerDataRepository workerDataRepository;
+    private final WorkerRepository workerRepository; // Inject the WorkerRepository
 
     // Add WorkerData using the builder pattern
-    public ResponseEntity<WorkerData> addWorkerData(WorkerData workerData) {
+    public ResponseEntity<WorkerData> addWorkerData(WorkerData workerData, Long workerId) {
+        Worker worker = workerRepository.findById(workerId).orElse(null);
+        if (worker == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // Return bad request if worker is not found
+        }
         try {
             WorkerData newWorkerData = WorkerData.builder()
                     .id(workerData.getId())
@@ -29,7 +36,7 @@ public class WorkerDataService {
                     .stoneName(workerData.getStoneName())
                     .stoneSize(workerData.getStoneSize())
                     .todayGainPrice(workerData.getTodayGainPrice())
-                    .worker(workerData.getWorker())
+                    .worker(worker)  // Assign the Worker object here
                     .createDate(new Date())  // Set the create date to the current date
                     .updateDate(null)        // No update date at creation
                     .build();

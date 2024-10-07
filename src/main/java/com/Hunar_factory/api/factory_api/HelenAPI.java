@@ -17,8 +17,8 @@ import java.util.List;
 public class HelenAPI {
     private final HelenService helenService;
     @PostMapping("/addHelen")
-    public ResponseEntity<Helen> addHelen(@RequestBody Helen helen) {
-        return helenService.addHelen(helen);
+    public ResponseEntity<Helen> addHelen(@RequestBody Helen helen, @RequestParam Long workerId) {
+        return helenService.addHelen(helen, workerId);
     }
 
     @PutMapping("/updateHelenById/{id}")
